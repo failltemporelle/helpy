@@ -7,6 +7,7 @@ export function ExternalLink(
   props: Omit<React.ComponentProps<typeof Link>, 'href'> & { href: string }
 ) {
   return (
+    
     <Link
       target="_blank"
       {...props}

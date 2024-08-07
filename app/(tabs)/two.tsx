@@ -1,80 +1,87 @@
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Icon } from '@rneui/themed';
-import { Button, Card } from '@rneui/themed';
+import React from 'react';
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Icon, Button } from '@rneui/themed';
 
-const items = [
+const categories = [
   { name: 'Faire mes courses', icon: 'shopping-cart' },
   { name: 'Besoin de main d’oeuvre', icon: 'handshake' },
   { name: 'Activité sportive', icon: 'sports-soccer' },
   { name: 'Animaux', icon: 'pets' },
   { name: 'Organisme/association', icon: 'group' },
   { name: 'Autre', icon: 'help' },
-  { name: 'Ménage', icon: 'clear'},
 ];
 
-export default function TabTwoScreen() {
+const RequestPage: React.FC = () => {
   return (
-    <View style={styles.container2}>
-      <Button title="Je fais une dmande pour" />
-      <View style={styles.container}>
-        {/* <EditScreenInfo path="app/(tabs)/two.tsx" /> */}
-        {items.map((item, index) => (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Faire une demande</Text>
+        <TouchableOpacity>
+          <Icon name="add" type="material" color="black" />
+        </TouchableOpacity>
+      </View>
+      <Button title="Je fais une demande pour" buttonStyle={styles.mainButton} />
+      <View style={styles.card}>
+        {categories.map((category, index) => (
           <TouchableOpacity key={index} style={styles.item}>
             <View style={styles.iconContainer}>
-              <Icon name={item.icon} type="material" color="#00aced" size={24} />
+              <Icon name={category.icon} type="material" color="#00aced" size={24} />
             </View>
-            <Text style={styles.itemText}>{item.name}</Text>
+            <Text style={styles.itemText}>{category.name}</Text>
             <Icon name="chevron-right" type="material" color="#00aced" size={24} />
           </TouchableOpacity>
         ))}
       </View>
-    </View>
+    </ScrollView>
   );
-}
-
+};
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    padding: 20,
+    backgroundColor: '#f0f0f0',
     alignItems: 'center',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#00aced',
-    backgroundColor: '#f8f9fa',
-    padding: 10,
-    margin: 10,
   },
-  container2: {
-    flex: 1,
+  header: {
+    flexDirection: 'row',
+    width: '100%',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    margin :5,
+    marginBottom: 20,
   },
-  title: {
+  headerText: {
     fontSize: 20,
     fontWeight: 'bold',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  mainButton: {
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    width: '100%',
+    padding: 15,
+    marginBottom: 20,
+  },
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    width: '100%',
+    padding: 10,
+    elevation: 3,
   },
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    padding: 15,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
   },
   iconContainer: {
     marginRight: 10,
   },
-  Button : {
-
-    borderRadius : 24,
-  },
   itemText: {
     flex: 1,
     fontSize: 16,
   },
 });
+
+export default RequestPage;
